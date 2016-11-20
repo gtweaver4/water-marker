@@ -1,1 +1,1 @@
-/home/grant/Photo/background.jpg
+/home/grant/Programming/python/water-marker/watermark.png
