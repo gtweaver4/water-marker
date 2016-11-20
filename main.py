@@ -4,6 +4,7 @@ from tkFileDialog import askdirectory
 import sys
 from PIL import Image
 import os
+import shutil
 
 photo_path = ""
 remembered_file = 'watermarker_remembered_path.txt'
@@ -11,9 +12,14 @@ remembered_file = 'watermarker_remembered_path.txt'
 def watermark_folder():
     global photo_path
     files = os.listdir(photo_path)
+    if not os.path.exists(photo_path + "/watermarked_images"):
+        os.mkdir(photo_path + '/watermarked_images')
     for f in files:
         watermark_file((photo_path + "/" + f))
 
+    move_files()
+    print('completed')
+    sys.exit()
 
 
 def ask_directory():
@@ -40,6 +46,20 @@ def import_watermark_path():
         f.close()
     else:
         print('Please select a .JPG, .JPEG, or .PNG image')
+
+def move_files():
+    global photo_path
+    source_folder = os.getcwd()
+    destination_folder = photo_path + "/watermarked_images"
+    #if not os.path.exists(destination_folder):
+        #os.mkdir(destination_folder, 0755)
+
+    files = os.listdir(source_folder)
+
+    for f in files:
+        if(f.endswith('.jpg') or f.endswith('jpeg') or f.endswith('png')):
+            full_path = source_folder + "/" + f
+            shutil.move(full_path , destination_folder)
 
 
 def watermark_file(file_path):
