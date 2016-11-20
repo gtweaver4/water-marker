@@ -1,8 +1,8 @@
 from Tkinter import *
 from tkFileDialog import askopenfilename
 from tkFileDialog import askdirectory
-import sys
 from PIL import Image
+import sys
 import os
 import shutil
 
@@ -23,7 +23,6 @@ def watermark_folder():
     move_files()
     print('completed')
     sys.exit()
-
 
 #gets a directory to set as the folder_path
 def ask_directory():
@@ -77,14 +76,11 @@ root.geometry('360x200')
 
 select_label = Label(root, text = "Please import the folder you wish to watermark").grid(row = 0)
 import_button = Button(root, text = "Import", command = lambda root = root:ask_directory()).grid(row = 1)
-
 watermarker_label = Label(root, text = "Select your watermark").grid(row = 2)
 select_button = Button(root, text = "Select", command = lambda root = root:import_watermark_path()).grid(row = 3)
-watermark_image = PhotoImage(file = open(remembered_file, 'r').read())
+reminder_label = Label(root, text = "Reminder: Your last used watermark will be saved for reuse").grid(row = 4)
 watermarker = Button(root, text = 'Process', command = lambda root = root: watermark_folder()).grid(row = 5)
-
 cancel_button = Button(root, text = "Cancel", command = lambda root = root:sys.exit()).grid(row = 6)
-
 
 #end of tkinter
 root.mainloop()
